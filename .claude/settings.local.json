@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\jason\\\\.gemini\\\\antigravity\\\\scratch\\\\Twilio\\\\sms-ai-companion\\\\twilio-senior-health-2g-AI-access\" -Recurse -File)",
+      "Bash(Select-Object FullName)",
+      "Bash(Sort-Object FullName)"
+    ]
+  }
+}
