@@ -20,6 +20,9 @@ Social isolation among older adults is a public health epidemic. The [U.S. Surge
 
 The demographic math compounds the crisis: 10,000 Americans turn 65 every day, community infrastructure is thinning, and the caregiver-to-senior ratio is shrinking.
 
+> "The CDC estimates that loneliness costs the U.S. economy an estimated $406 billion a year, in addition to the estimated $6.7 billion a year in Medicare costs for socially isolated older adults."
+> — [New York State Office for the Aging](https://aging.ny.gov/combating-social-isolation)
+
 ## What's Being Done
 
 **[NYSOFA + ElliQ](https://aging.ny.gov/)** (New York State) deployed ~900 AI companion robots to older adults, demonstrating a 95% reduction in loneliness and 30+ daily interactions sustained over time. The results validated the core thesis: AI companionship works for seniors. But hardware distribution, county-by-county rollout, and state budget constraints create a hard ceiling on reach.
@@ -219,6 +222,10 @@ MIT — see [LICENSE](LICENSE)
 
 ---
 
-Built by [GrafikInc](https://grafikinc.com) in Kilifi, Kenya.
+For partnerships, technical questions, or production deployment support:
+
+- Email: [jason@mcguiness.design](mailto:jason@mcguiness.design)
+- Consulting: [grafikinc.com](https://grafikinc.com)
+- Portfolio: [mcguiness.design](https://mcguiness.design)
 
 *"The people most excluded from AI are the ones who need it most."*
