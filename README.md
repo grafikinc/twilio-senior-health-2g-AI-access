@@ -25,11 +25,11 @@ The demographic math compounds the crisis: 10,000 Americans turn 65 every day, c
 
 ## What's Being Done
 
-**[NYSOFA + ElliQ](https://aging.ny.gov/)** (New York State) deployed ~900 AI companion robots to older adults, demonstrating a 95% reduction in loneliness and 30+ daily interactions sustained over time. The results validated the core thesis: AI companionship works for seniors. But hardware distribution, county-by-county rollout, and state budget constraints create a hard ceiling on reach.
+**[NYSOFA + ElliQ](https://aging.ny.gov/)** (New York State) deployed roughly 900 AI companion robots to older adults and saw a 95% reduction in loneliness, with 30+ daily interactions sustained over time. The results validated the core thesis: AI companionship works for seniors. But hardware distribution, county-by-county rollout, and state budget constraints create a hard ceiling on reach.
 
-**[Sailor Health](https://sailorhealth.com/)** is building the AI-native health system for aging (virtual mental health, care navigation, AI coaches), doubling every 75 days across 43 states. But like all telehealth, it assumes a smartphone, an internet connection, and digital literacy.
+**[Sailor Health](https://sailorhealth.com/)** is building the AI-native health system for aging, covering virtual mental health, care navigation, and AI coaches, and is doubling every 75 days across 43 states. But like all telehealth, it assumes a smartphone, an internet connection, and digital literacy.
 
-**The gap:** roughly 30 million U.S. adults over 65 don't own a smartphone. They all have phones. They all know how to text. Neither a robot in a box nor an app in a store can reach them.
+The gap: roughly 30 million U.S. adults over 65 don't own a smartphone. They all have phones. They all know how to text. Neither a robot in a box nor an app in a store can reach them.
 
 ## What This Is
 
@@ -49,23 +49,23 @@ A PHP gateway that turns any SMS-capable phone into an AI companion for an older
                                          └────────┘  └─────────┘  └────────┘
 ```
 
-1. Senior sends a text → SMS gateway forwards it as an HTTP POST
+1. Senior sends a text; the SMS gateway forwards it as an HTTP POST
 2. `webhook.php` identifies the sender by phone number
 3. Loads their profile (name, health context, preferences) and conversation history
 4. Sends the full context to any OpenAI-compatible LLM
 5. Returns a short, warm reply as SMS
 
-The AI knows who it's talking to. It asks follow-up questions. It weaves in context naturally — not "your file says you have arthritis," but "how are your hands feeling today? Good enough for some knitting?"
+The AI knows who it's talking to. It asks follow-up questions. It weaves in context naturally: not "your file says you have arthritis," but "how are your hands feeling today? Good enough for some knitting?"
 
 If the person mentions severe depression, self-harm, or suicidal thoughts, the system immediately provides the 988 Suicide & Crisis Lifeline.
 
 ## Origin
 
-This project is a direct branch of [AgroFutures](https://github.com/grafikinc/africas-talking-agtech/) — an AI advisory system built for smallholder farmers and fishermen on feature phones in East Africa, delivered over USSD and voice through Africa's Talking.
+This project is a direct branch of [AgroFutures](https://github.com/grafikinc/africas-talking-agtech/), an AI advisory system built for smallholder farmers and fishermen on feature phones in East Africa, delivered over USSD and voice through Africa's Talking.
 
 Same thesis, two continents: **the people most excluded from AI are the ones who need it most.** In coastal Kenya, that's a fisherman on a $15 Nokia who needs to know if it's safe to go out. In New York, that's a 78-year-old widow on a flip phone who hasn't spoken to anyone in three days.
 
-The architecture is deliberately simple — PHP, flat files, no frameworks — because the deployment targets are the same: underfunded organizations running on shared hosting, serving populations that the app-store economy has written off.
+The architecture is deliberately simple (PHP, flat files, no frameworks) because the deployment targets are the same: underfunded organizations running on shared hosting, serving populations that the app-store economy has written off.
 
 ## Quick Start
 
@@ -100,8 +100,8 @@ https://your-server.com/webhook.php
 
 | Provider | Where to Set It |
 |----------|----------------|
-| Twilio   | Phone Number → Messaging → "A message comes in" → Webhook |
-| Vonage   | Applications → Your App → Inbound URL |
+| Twilio   | Phone Number > Messaging > "A message comes in" > Webhook |
+| Vonage   | Applications > Your App > Inbound URL |
 | Generic  | POST `from` and `body` fields to the webhook |
 
 ### Test Without a Real SMS Number
@@ -126,7 +126,7 @@ curl -X POST http://localhost/webhook.php \
   -d "from=%2B15551234567&body=Hello%2C+how+are+you+today"
 ```
 
-A successful response will return TwiML XML (or JSON/plain text depending on `GATEWAY_TYPE`). Test the reset command with `Body=reset`. To simulate a profile lookup, name your profile file `+15551234567.json` and use `From=%2B15551234567`.
+A successful response returns TwiML XML (or JSON/plain text depending on `GATEWAY_TYPE`). Test the reset command with `Body=reset`. To simulate a profile lookup, name your profile file `+15551234567.json` and use `From=%2B15551234567`.
 
 ### Test With a Real Number
 
@@ -160,7 +160,7 @@ JSON files in `profiles/` named by phone number (e.g., `+15551234567.json`):
 }
 ```
 
-No profile? The companion still works — just without personal context.
+No profile? The companion still works, just without personal context.
 
 ## Project Structure
 
@@ -187,13 +187,13 @@ No profile? The companion still works — just without personal context.
 
 ### Voice Callbacks (blocked — needs A2P registration)
 
-The natural next step is voice delivery — an automated call that reads the AI's response aloud, the same way [AgroFutures delivers advisories](https://github.com/grafikinc/africas-talking-agtech/) to farmers in East Africa. Many seniors would prefer a phone call to a text, and voice eliminates the literacy/vision barrier entirely.
+The natural next step is voice delivery: an automated call that reads the AI's response aloud, the same way [AgroFutures delivers advisories](https://github.com/grafikinc/africas-talking-agtech/) to farmers in East Africa. Many seniors would prefer a phone call to a text, and voice eliminates the literacy and vision barrier entirely.
 
 The architecture for this already exists in the AgroFutures codebase (TTS callbacks via Africa's Talking). Porting it to Twilio or Vonage voice APIs is straightforward.
 
-**What's blocking it:** U.S. carriers require [A2P 10DLC registration](https://www.twilio.com/docs/messaging/guides/10dlc) for any application-to-person messaging or calling. Without a registered campaign (which requires a verified business, use-case approval, and carrier vetting), outbound messages and calls get silently filtered as spam. This registration process is designed for enterprises, not open-source projects or small nonprofits — which is ironic, given that the people this project serves are exactly the ones the carrier ecosystem can't reach.
+**What's blocking it:** U.S. carriers require [A2P 10DLC registration](https://www.twilio.com/docs/messaging/guides/10dlc) for any application-to-person messaging or calling. Without a registered campaign (which requires a verified business, use-case approval, and carrier vetting), outbound messages and calls get silently filtered as spam. This registration process is designed for enterprises, not open-source projects or small nonprofits, which is ironic given that the people this project serves are exactly the ones the carrier ecosystem can't reach.
 
-**If you have a registered A2P campaign** or work at an organization that does (an Area Agency on Aging, a health system, a senior services nonprofit), you could add voice delivery in a weekend. PRs welcome.
+If you have a registered A2P campaign, or work at an organization that does (an Area Agency on Aging, a health system, a senior services nonprofit), you could add voice delivery in a weekend. PRs welcome.
 
 ### Other planned features
 
@@ -204,10 +204,10 @@ The architecture for this already exists in the AgroFutures codebase (TTS callba
 
 ## Limitations
 
-- **SMS carrier regulations**: U.S. carriers enforce A2P 10DLC registration for application-to-person messaging. Register your number properly with your gateway provider or messages will be filtered as spam.
-- **SMS is not encrypted**: Don't store sensitive medical data in profiles unless you understand the HIPAA implications for your use case.
-- **Latency**: LLM response + gateway round-trip = 3–8 seconds. Acceptable for SMS, where expectations are already asynchronous.
-- **Flat-file storage**: Conversation history uses JSON files. For production at scale, swap `ConversationStore` for a database-backed implementation.
+- **SMS carrier regulations:** U.S. carriers enforce A2P 10DLC registration for application-to-person messaging. Register your number properly with your gateway provider or messages will be filtered as spam.
+- **SMS is not encrypted:** Don't store sensitive medical data in profiles unless you understand the HIPAA implications for your use case.
+- **Latency:** LLM response + gateway round-trip = 3-8 seconds. Acceptable for SMS, where expectations are already asynchronous.
+- **Flat-file storage:** Conversation history uses JSON files. For production at scale, swap `ConversationStore` for a database-backed implementation.
 
 ## Related Work
 
